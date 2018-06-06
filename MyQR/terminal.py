@@ -6,6 +6,7 @@ import os
 
 def main():
     import argparse
+    # https://howdoesitfeeltobeafiction.org/ -p aliza_new.jpg -c
     argparser = argparse.ArgumentParser()
     argparser.add_argument('Words', help = 'The words to produce you QR-code picture, like a URL or a sentence. Please read the README file for the supported characters.')
     argparser.add_argument('-v', '--version', type = int, choices = range(1,41), default = 1, help = 'The version means the length of a side of the QR-Code picture. From little size to large is 1 to 40.')
@@ -22,17 +23,27 @@ def main():
         print('It may take a while, please wait for minutes...')
     
     try:
-        ver, ecl, qr_name = run(
-            args.Words,
-            args.version,
-            args.level,
-            args.picture,
-            args.colorized,
-            args.contrast,
-            args.brightness,
-            args.name,
-            args.directory
-            )   
-        print('Succeed! \nCheck out your', str(ver) + '-' + str(ecl), 'QR-code:', qr_name)
+        for im in os.listdir('monuments'):
+            ver, ecl, qr_name = run(
+                # args.Words,
+                # args.version,
+                # args.level,
+                # args.picture,
+                # args.colorized,
+                # args.contrast,
+                # args.brightness,
+                # args.name,
+                # args.directory
+                    'https://howdoesitfeeltobeafiction.org/',
+                    1,
+                    'H',
+                    'monuments/{}'.format(im),
+                    True,
+                    1.0,
+                    1.0,
+                    None,
+                    '/Users/max/dev_projects/qrcode/codes'
+                )
+            print('Succeed! \nCheck out your', str(ver) + '-' + str(ecl), 'QR-code:', qr_name)
     except:
         raise
